@@ -1,22 +1,13 @@
 const display = document.querySelector(".calc-display");
 const buttons = document.querySelectorAll(".btn");
-const clearButton = document.querySelector("#clear");
-const negativeButton= document.querySelector("#negative-toggle");
-const percentButton = document.querySelector("#percent");
-const addButton = document.querySelector("#add");
-const subtractButton = document.querySelector("#subtract");
-const divideButton = document.querySelector("#divide");
-const mulitplyButton = document.querySelector("#multiply");
-
 let a = "0";
 let b = "";
 let operand = "";
-let answer = 0; 
+let answer = "";
 
 //operation functions
 add = (a, b) =>{
-    console.log("add runs" + a + b)
-return parseInt(a + b);
+return a + b;
 }
 
 subtract = (a, b) =>{
@@ -35,30 +26,30 @@ clear = () => {
     a = "0";
     b = "";
     operand = "";
+    answer = "";
     display.innerText = "0"
 }
 
 
 operate = (a, b, operand) => {
+    let result; 
     switch (operand){
         case "add":
-          answer = add(a,b);
+          result = add(a,b);
           break;
         case "subtract":
-          answer = subtract(a,b);
-          break;
+          result = subtract(a,b);
+          break
         case "multiply":
-          answer = multiply(a,b);
-          break;
+          result = multiply(a,b);
+          break
         case "divide":
           answer = divide(a,b); 
-          break;
+          break
         default:
             console.log(operand);
     }
-    operand = "";
-    console.log(answer)
-    return answer;
+    return result;
 } 
 
 
@@ -68,23 +59,24 @@ btnArr = Array.from(buttons);
 //seperate buttons into arrays
 numberBtns = btnArr.filter(btn => !isNaN(btn.innerText));
 functionBtns = btnArr.filter(btn => isNaN(btn.innerText));
-console.log(functionBtns)
 
-//add event lisnters to function buttons
+//add event listeners to function buttons
 functionBtns.map((btn) => {
     btn.addEventListener("click", () => {
         console.log(btn.id)
-      if(btn.id == "equals"){
+      if(btn.id == "equals" && a !== "" && b !== "" && operand !== ""){
           a = parseInt(a);
           b = parseInt(b);
           display.innerText = operate(a, b, operand);
+          answer = operate(a, b, operand);
+          a = answer;
+          b = "";
+          operand = "";
       }else if(btn.id === "clear"){
           clear()
       }else{
           operand = btn.id;
       }
-      
-        
     })
 })
 
