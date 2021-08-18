@@ -117,7 +117,13 @@ functionBtns.map((btn) => {
      btn.addEventListener("touchstart", () => {
         btn.classList.add("orange-hover")
     })
+    btn.addEventListener("mouseenter", () => {
+        btn.classList.add("orange-hover")
+    })
     btn.addEventListener("touchend", () => {
+        btn.classList.remove("orange-hover")
+    })
+    btn.addEventListener("mouseleave", () => {
         btn.classList.remove("orange-hover")
     })
 })
@@ -142,7 +148,13 @@ numberBtns.map((btn) => {
     btn.addEventListener("touchstart", () => {
         btn.classList.add("number-hover")
     })
+    btn.addEventListener("mouseenter", () => {
+        btn.classList.add("number-hover")
+    })
     btn.addEventListener("touchend", () => {
+        btn.classList.remove("number-hover")
+    })
+    btn.addEventListener("mouseleave", () => {
         btn.classList.remove("number-hover")
     })
 })
