@@ -2,6 +2,7 @@ body{
     background-color: black;
     width: 100%;
     margin: 0;
+    touch-action: none;
 }
 
 .calculator{
@@ -27,7 +28,7 @@ body{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .btn{
@@ -46,7 +47,11 @@ body{
 }
 
 .btn--orange{
-    background-color: rgb(253, 158, 43)
+    background-color: #fd9f2b;
+}
+.orange-hover{
+    background-color: #febc6b;
+    cursor: pointer;
 }
 .number-hover{
     background-color: #85898c;
@@ -55,8 +60,41 @@ body{
 
 .btn-zero{
     flex-grow: 2;
-    border-radius: 45px;
-    justify-content: left;
-    padding-left: 24px;
-    
+    border-radius: 45px;    
+}
+
+
+/* iphone 5se */
+@media only screen and (max-width: 320px){
+    .btn{
+        font-size: 1em;
+        width: 60px;
+        height: 60px;
+        margin: 9px 5px;
+    }
+}
+
+@media only screen and (max-width: 360px){
+    .calc-display{
+        margin-top: 60px;
+    }
+    .calculator{
+        width: 100%;
+    }
+}
+@media only screen and (min-width: 385px) {
+    .calculator{
+        width: 86%;
+    }
+
+}
+
+
+@media only screen and (min-width: 506px) {
+    .calculator{
+        width: 432px;
+    }
+}
+@media only screen and (min-width: 678px) {
+   
 }

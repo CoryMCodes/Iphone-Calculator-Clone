@@ -28,7 +28,7 @@ multiply = (a, b) => {
 } 
 
 clear = () => {
-    inpu1 = "0";
+    input1 = "0";
     input2 = "";
     operand = "";
     answer = "";
@@ -54,9 +54,6 @@ negate = (a,b) => {
         return (b * -1);
     }
 }
-
-
-
 
 operate = (a, b, operand) => {
     let result; 
@@ -115,20 +112,30 @@ functionBtns.map((btn) => {
           operand = btn.id;
       }
     })
+
+     //UI Number Button Events
+     btn.addEventListener("touchstart", () => {
+        btn.classList.add("orange-hover")
+    })
+    btn.addEventListener("touchend", () => {
+        btn.classList.remove("orange-hover")
+    })
 })
+
 
 // add event listners to number buttons 
 numberBtns.sort((a,b) => a.innerText - b.innerText);
 numberBtns.map((btn) => {
     btn.addEventListener("click", () =>{
-        display.innerText = btn.innerText;
-        if(operand === ""){
+          display.innerText = btn.innerText;
+          if(operand === ""){
           input1 = btn.innerText  
-        }else{
+          }else{
           input2 = btn.innerText
-        }
+          }
           console.log("a = "+input1)
-          console.log("b = "+input2)      
+          console.log("b = "+input2)   
+        
     } )
 
     //UI Number Button Events
