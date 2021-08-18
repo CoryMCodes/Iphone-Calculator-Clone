@@ -63,7 +63,6 @@ functionBtns = btnArr.filter(btn => isNaN(btn.innerText));
 //add event listeners to function buttons
 functionBtns.map((btn) => {
     btn.addEventListener("click", () => {
-        console.log(btn.id)
       if(btn.id == "equals" && a !== "" && b !== "" && operand !== ""){
           a = parseInt(a);
           b = parseInt(b);
@@ -90,12 +89,16 @@ numberBtns.map((btn) => {
         }else{
             b = btn.innerText
         }
-         
           console.log("a = "+a)
-          console.log("b = "+b)   
-       
-        
+          console.log("b = "+b)      
     } )
+
+    btn.addEventListener("touchstart", () => {
+        btn.classList.add("number-hover")
+    })
+    btn.addEventListener("touchend", () => {
+        btn.classList.remove("number-hover")
+    })
 })
 
 

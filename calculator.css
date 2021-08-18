@@ -8,15 +8,20 @@ body{
     width:95%;
     border: red solid 1px;
     margin: 0 auto;
+    font-family: "Arial", sans-serif;
 }
 
 .calc-display{
-    background-color: yellow;
+    color: white;
+    font-size: 6em;
     width: 100%;
     margin: 0 auto;
-    min-height: 72px;
+    min-height: 110px;
     margin-top: 70px;
+    width: 80%;
+    text-align: right;
 }
+
 
 .button-container{
     display: flex;
@@ -38,6 +43,14 @@ body{
  align-items: center;
  color: white;
  border: none;
+}
+
+.btn--orange{
+    background-color: rgb(253, 158, 43)
+}
+.number-hover{
+    background-color: #85898c;
+    cursor: pointer;
 }
 
 .btn-zero{
