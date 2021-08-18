@@ -7,7 +7,6 @@ body{
 
 .calculator{
     width:95%;
-    border: red solid 1px;
     margin: 0 auto;
     font-family: "Arial", sans-serif;
 }
