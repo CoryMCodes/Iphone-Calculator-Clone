@@ -4,6 +4,7 @@ let a = "0";
 let b = "";
 let operand = "";
 let answer = "";
+display.innerText = "0";
 
 //operation functions
 add = (a, b) =>{
@@ -15,7 +16,11 @@ subtract = (a, b) =>{
     }
 
 divide = (a, b) => {
-    return a / b;
+    if(b == "0"){
+        return "Error"
+    }else{
+        return a / b;  
+    }
 } 
 
 multiply = (a, b) => {
@@ -44,12 +49,16 @@ operate = (a, b, operand) => {
           result = multiply(a,b);
           break
         case "divide":
-          answer = divide(a,b); 
+          result = divide(a,b); 
           break
         default:
             console.log(operand);
     }
-    return result;
+        if(isNaN(result)){
+            return "Error"
+        }else{
+            return parseFloat(result).toFixed(2);
+        }
 } 
 
 
