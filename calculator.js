@@ -1,7 +1,7 @@
 const display = document.querySelector(".calc-display");
 const buttons = document.querySelectorAll(".btn");
-let a = "0";
-let b = "";
+let input1 = "0";
+let input2 = "";
 let operand = "";
 let answer = "";
 display.innerText = "0";
@@ -28,12 +28,24 @@ multiply = (a, b) => {
 } 
 
 clear = () => {
-    a = "0";
-    b = "";
+    inpu1 = "0";
+    input2 = "";
     operand = "";
     answer = "";
     display.innerText = "0"
 }
+
+toPercent = (a, b) => {
+  if(b == ""){
+      input1 = a/100;
+      return input1
+  }else{
+      input2 = b/100
+      return input2
+  }
+}
+
+
 
 
 operate = (a, b, operand) => {
@@ -62,27 +74,27 @@ operate = (a, b, operand) => {
 } 
 
 
-
-btnArr = Array.from(buttons);
-
 //seperate buttons into arrays
+btnArr = Array.from(buttons);
 numberBtns = btnArr.filter(btn => !isNaN(btn.innerText));
 functionBtns = btnArr.filter(btn => isNaN(btn.innerText));
 
 //add event listeners to function buttons
 functionBtns.map((btn) => {
     btn.addEventListener("click", () => {
-      if(btn.id == "equals" && a !== "" && b !== "" && operand !== ""){
-          a = parseInt(a);
-          b = parseInt(b);
-          display.innerText = operate(a, b, operand);
-          answer = operate(a, b, operand);
-          a = answer;
-          b = "";
+      if(btn.id == "equals" && input1 !== "" && input2 !== "" && operand !== ""){
+          answer = operate(input1, input2, operand);
+          display.innerText = answer;
+          input1 = answer;
+          input2 = "";
           operand = "";
       }else if(btn.id === "clear"){
           clear()
-      }else{
+      }else if(btn.id === "percent"){
+          answer = toPercent(input1, input2)
+          display.innerText = answer
+      }
+      else{
           operand = btn.id;
       }
     })
@@ -94,14 +106,15 @@ numberBtns.map((btn) => {
     btn.addEventListener("click", () =>{
         display.innerText = btn.innerText;
         if(operand === ""){
-           a = btn.innerText  
+          input1 = btn.innerText  
         }else{
-            b = btn.innerText
+          input2 = btn.innerText
         }
-          console.log("a = "+a)
-          console.log("b = "+b)      
+          console.log("a = "+input1)
+          console.log("b = "+input2)      
     } )
 
+    //UI Number Button Events
     btn.addEventListener("touchstart", () => {
         btn.classList.add("number-hover")
     })
