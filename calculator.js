@@ -17,7 +17,7 @@ subtract = (a, b) =>{
 
 divide = (a, b) => {
     if(b == "0"){
-        return "Error"
+        return "Error";
     }else{
         return a / b;  
     }
@@ -32,17 +32,27 @@ clear = () => {
     input2 = "";
     operand = "";
     answer = "";
-    display.innerText = "0"
+    display.innerText = "0";
 }
 
 toPercent = (a, b) => {
   if(b == ""){
       input1 = a/100;
-      return input1
+      return input1;
   }else{
-      input2 = b/100
-      return input2
+      input2 = b/100;
+      return input2;
   }
+}
+
+negate = (a,b) => {
+    if(b == ""){
+        input1 = (a * -1);
+        return (a * -1);
+    }else{
+        input2 = (a * -1);
+        return (b * -1);
+    }
 }
 
 
@@ -92,7 +102,10 @@ functionBtns.map((btn) => {
           clear()
       }else if(btn.id === "percent"){
           answer = toPercent(input1, input2)
-          display.innerText = answer
+          display.innerText = answer;
+      }else if (btn.id === "negate"){
+          answer = negate(input1, input2)
+          display.innerText = answer;
       }
       else{
           operand = btn.id;
