@@ -79,7 +79,11 @@ operate = (a, b, operand) => {
         if(isNaN(result)){
             return "Error"
         }else{
-            return parseFloat(result).toFixed(2);
+            if(Number.isInteger(parseFloat(result))){
+                return result.toFixed(0)
+            }else{
+                return result.toFixed(4)
+            }
         }
 } 
 
