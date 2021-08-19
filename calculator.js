@@ -46,17 +46,19 @@ toPercent = (a, b) => {
 }
 
 negate = (a,b) => {
-    if(b == ""){
+    if(b === ""){
         input1 = (a * -1);
         return (a * -1);
     }else{
-        input2 = (a * -1);
+        input2 = (b * -1);
         return (b * -1);
     }
 }
 
 operate = (a, b, operand) => {
-    let result; 
+    let result;
+    a = Number(a);
+    b = Number(b); 
     switch (operand){
         case "add":
           result = add(a,b);
@@ -73,16 +75,18 @@ operate = (a, b, operand) => {
         default:
             console.log(operand);
     }
-        if(isNaN(result)){
-            return "Error"
-        }else{
-            if(Number.isInteger(parseFloat(result))){
-                return result.toFixed(0)
-            }else{
-                return result.toFixed(4)
-            }
-        }
-} 
+
+    if(isNaN(result)) return "Error";
+
+    if(result == 0) return result;
+
+    if(Number.isInteger(result)){
+       return parseInt(result) 
+    }else{
+       return parseFloat(result).toFixed(4);
+    }
+}
+
 
 
 //seperate buttons into arrays
@@ -133,11 +137,30 @@ functionBtns.map((btn) => {
 numberBtns.sort((a,b) => a.innerText - b.innerText);
 numberBtns.map((btn) => {
     btn.addEventListener("click", () =>{
-          display.innerText = btn.innerText;
-          if(operand === ""){
-          input1 = btn.innerText  
-          }else{
-          input2 = btn.innerText
+          
+          if(operand === "" && display.innerText == "0"){
+            input1 = btn.innerText;
+            display.innerText = input1;
+          }else if(operand === "" && answer == ""){
+            input1 += btn.innerText;
+            display.innerText = input1; 
+          }
+
+          if(operand != "" && answer === ""){
+            input2 += btn.innerText;
+            display.innerText = input2;
+          }
+
+          if(operand != "" && answer !== ""){
+              input2 += btn.innerText;
+              display.innerText = input2;
+          }
+
+
+          if(operand == "" && answer !== ""){
+              clear()
+              input1 = btn.innerText;
+              display.innerText = input1;
           }
           console.log("a = "+input1)
           console.log("b = "+input2)   
@@ -158,5 +181,4 @@ numberBtns.map((btn) => {
         btn.classList.remove("number-hover")
     })
 })
-
 
