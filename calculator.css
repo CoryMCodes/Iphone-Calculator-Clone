@@ -7,6 +7,7 @@ body{
 
 .calculator{
     width:95%;
+    max-width: 432px;
     margin: 0 auto;
     font-family: "Arial", sans-serif;
 }
@@ -15,10 +16,10 @@ body{
     color: white;
     font-size: 6em;
     width: 100%;
-    margin: 0 auto;
+    max-width: 432px;
+    overflow: hidden;
     min-height: 110px;
     margin-top: 70px;
-    width: 80%;
     text-align: right;
 }
 
@@ -71,16 +72,4 @@ body{
         height: 60px;
         margin: 9px 5px;
     }
-}
-
-
-
-
-@media only screen and (min-width: 458px) {
-    .calculator{
-        width: 432px;
-    }
-}
-@media only screen and (min-width: 678px) {
-   
 }

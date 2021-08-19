@@ -137,35 +137,38 @@ functionBtns.map((btn) => {
 numberBtns.sort((a,b) => a.innerText - b.innerText);
 numberBtns.map((btn) => {
     btn.addEventListener("click", () =>{
-          
-          if(operand === "" && display.innerText == "0"){
+        if(input1.length === 8 || input2.length === 8){
+            return
+        }else
+        {
+            if(operand === "" && display.innerText == "0"){
             input1 = btn.innerText;
             display.innerText = input1;
-          }else if(operand === "" && answer == ""){
+            }else if(operand === "" && answer == ""){
             input1 += btn.innerText;
             display.innerText = input1; 
-          }
+            }
 
-          if(operand != "" && answer === ""){
+            if(operand != "" && answer === ""){
             input2 += btn.innerText;
             display.innerText = input2;
-          }
+            }
 
-          if(operand != "" && answer !== ""){
-              input2 += btn.innerText;
-              display.innerText = input2;
-          }
+            if(operand != "" && answer !== ""){
+                input2 += btn.innerText;
+                display.innerText = input2;
+            }
 
 
-          if(operand == "" && answer !== ""){
-              clear()
-              input1 = btn.innerText;
-              display.innerText = input1;
-          }
-          console.log("a = "+input1)
-          console.log("b = "+input2)   
-        
-    } )
+            if(operand == "" && answer !== ""){
+                clear()
+                input1 = btn.innerText;
+                display.innerText = input1;
+            }
+            console.log("a = "+input1)
+            console.log("b = "+input2)    
+        }
+  } )
 
     //UI Number Button Events
     btn.addEventListener("touchstart", () => {
