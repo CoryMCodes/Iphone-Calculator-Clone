@@ -1,10 +1,31 @@
 const display = document.querySelector(".calc-display");
 const buttons = document.querySelectorAll(".btn");
-let input1 = "0";
-let input2 = "";
+let input1 = [];
+let input2 = [];
 let operand = "";
 let answer = "";
-display.innerText = "0";
+//step 1 -> getting input1
+let step1 = true;
+// step2 -> operand set, receive input2
+let step2 = false;
+
+
+
+//input formatter - takes inputs and returns numbers for math calculations
+inputFormatter = (input) => {
+    if(typeof(input) === "number"){
+        return input;
+    }
+
+    let formattedInput = input.join("");
+    return Number(formattedInput);
+}
+
+// Define and call upDate Display to set initial value
+updateDisplay = (str) => {
+    display.innerText = str;
+}
+updateDisplay("0");
 
 //operation functions
 add = (a, b) =>{
@@ -28,11 +49,13 @@ multiply = (a, b) => {
 } 
 
 clear = () => {
-    input1 = "0";
-    input2 = "";
-    operand = "";
-    answer = "";
-    display.innerText = "0";
+    input1 = [];
+    input2 = [];
+    step1 = true;
+    step2 = false;
+    step3 = false;
+    updateDisplay(0);
+
 }
 
 toPercent = (a, b) => {
@@ -45,20 +68,16 @@ toPercent = (a, b) => {
   }
 }
 
-negate = (a,b) => {
-    if(b === ""){
-        input1 = (a * -1);
-        return (a * -1);
-    }else{
-        input2 = (b * -1);
-        return (b * -1);
+negate = () => {
+    if(step1){
+        return input1.unshift("-")
     }
 }
 
 operate = (a, b, operand) => {
     let result;
-    a = Number(a);
-    b = Number(b); 
+    a = inputFormatter(a);
+    b = inputFormatter(b); 
     switch (operand){
         case "add":
           result = add(a,b);
@@ -73,7 +92,7 @@ operate = (a, b, operand) => {
           result = divide(a,b); 
           break
         default:
-            console.log(operand);
+          console.log(operand);
     }
 
     if(isNaN(result)) return "Error";
@@ -83,10 +102,9 @@ operate = (a, b, operand) => {
     if(Number.isInteger(result)){
        return parseInt(result) 
     }else{
-       return parseFloat(result).toFixed(4);
+       return parseFloat(result).toPrecision(8);
     }
 }
-
 
 
 //seperate buttons into arrays
@@ -94,26 +112,41 @@ btnArr = Array.from(buttons);
 numberBtns = btnArr.filter(btn => !isNaN(btn.innerText));
 functionBtns = btnArr.filter(btn => isNaN(btn.innerText));
 
+
 //add event listeners to function buttons
 functionBtns.map((btn) => {
     btn.addEventListener("click", () => {
-      if(btn.id == "equals" && input1 !== "" && input2 !== "" && operand !== ""){
+      if(btn.id == "equals"){
           answer = operate(input1, input2, operand);
-          display.innerText = answer;
-          input1 = answer;
-          input2 = "";
-          operand = "";
-      }else if(btn.id === "clear"){
-          clear()
-      }else if(btn.id === "percent"){
+          updateDisplay(answer);
+          input1 = answer.toString().split("");
+          input2 = [];
+          step1 = false;
+          step2 = false;
+          step3 = true;
+          console.log(answer)
+      }
+      
+      if(btn.id === "clear"){
+          clear();
+      }
+      
+      if(btn.id === "percent"){
           answer = toPercent(input1, input2)
-          display.innerText = answer;
-      }else if (btn.id === "negate"){
-          answer = negate(input1, input2)
+          updateDisplay(answer);
+          console.log(answer)
+      }
+       
+      if(btn.id === "negate"){
+          answer = negate()
           display.innerText = answer;
       }
-      else{
+      
+      if(btn.id ){
+          step1 = false;
+          step2 = true;
           operand = btn.id;
+          console.log(operand)
       }
     })
 
@@ -137,37 +170,44 @@ functionBtns.map((btn) => {
 numberBtns.sort((a,b) => a.innerText - b.innerText);
 numberBtns.map((btn) => {
     btn.addEventListener("click", () =>{
-        if(input1.length === 8 || input2.length === 8){
-            return
-        }else
-        {
-            if(operand === "" && display.innerText == "0"){
-            input1 = btn.innerText;
-            display.innerText = input1;
-            }else if(operand === "" && answer == ""){
-            input1 += btn.innerText;
-            display.innerText = input1; 
-            }
+      
+      if(step1){
+          if(input1.length != 8){
+            input1.push(btn.innerText)
+            updateDisplay(input1.join(""))
+          /*
+            if(input1[0] == 0){
+              input1.shift();
+              input1.push(btn.innerText)
+              updateDisplay(input1.join(""))
+            }else{
+              input1.push(btn.innerText)
+              updateDisplay(input1.join(""))  
+                }  
+                */  
+          }
+      }
+ /*
+      if(!step1 && !step2 && step3){
+          input2.push(btn.innerText)
+          updateDisplay(input2.join(""));
+      }
 
-            if(operand != "" && answer === ""){
-            input2 += btn.innerText;
-            display.innerText = input2;
-            }
-
-            if(operand != "" && answer !== ""){
-                input2 += btn.innerText;
-                display.innerText = input2;
-            }
-
-
-            if(operand == "" && answer !== ""){
-                clear()
-                input1 = btn.innerText;
-                display.innerText = input1;
-            }
-            console.log("a = "+input1)
-            console.log("b = "+input2)    
+      if(step1 && step2 && !step3){
+        input2.push(btn.innerText)
+        updateDisplay(input2.join(""))    
+      }
+      */
+     if(step2){
+        if(input2.length < 8){
+        input2.push(btn.innerText)
+        updateDisplay(input2.join("")); 
         }
+     }
+
+     console.log(input1)
+     console.log(input2)
+
   } )
 
     //UI Number Button Events

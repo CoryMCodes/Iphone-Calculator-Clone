@@ -7,20 +7,24 @@ body{
 
 .calculator{
     width:95%;
-    max-width: 432px;
     margin: 0 auto;
     font-family: "Arial", sans-serif;
 }
 
-.calc-display{
-    color: white;
-    font-size: 6em;
+.upper-calc{
+    position: relative;
     width: 100%;
-    max-width: 432px;
-    overflow: hidden;
     min-height: 110px;
     margin-top: 70px;
-    text-align: right;
+}
+
+.calc-display{
+    position: absolute;
+    color: white;
+    font-size: 5em;
+    bottom: 0;
+    right: 0;
+    
 }
 
 
@@ -73,3 +77,23 @@ body{
         margin: 9px 5px;
     }
 }
+
+@media only screen and (max-width: 387px){
+    .calc-display{
+        font-size: 3.8em;
+    }
+}
+
+@media only screen and (max-width: 300px){
+    .calc-display{
+        font-size: 3.5em;
+    }
+}
+
+
+@media only screen and (min-width: 458px) {
+    .calculator{
+        width: 432px;
+    }
+}
+
