@@ -6,7 +6,7 @@ let operand = "";
 let answer = "";
 //step 1 -> getting input1
 let step1 = true;
-// step2 -> operand set, receive input2
+// step2 -> input1 is set, receive input2
 let step2 = false;
 
 
@@ -53,7 +53,6 @@ clear = () => {
     input2 = [];
     step1 = true;
     step2 = false;
-    step3 = false;
     updateDisplay(0);
 
 }
@@ -69,8 +68,19 @@ toPercent = (a, b) => {
 }
 
 negate = () => {
-    if(step1){
-        return input1.unshift("-")
+    if(step2 && input2.length != 0){
+        let strInput = input2.join("");
+        let negatedInput = strInput * -1;
+        input2 = (""+ negatedInput).split("");
+        console.log(input2);
+        updateDisplay(negatedInput);  
+         }
+    else{ 
+      let strInput = input1.join("");
+      let negatedInput = strInput * -1;
+      input1 = (""+negatedInput).split("");
+      console.log(input1);
+      updateDisplay(negatedInput);
     }
 }
 
@@ -117,37 +127,34 @@ functionBtns = btnArr.filter(btn => isNaN(btn.innerText));
 functionBtns.map((btn) => {
     btn.addEventListener("click", () => {
       if(btn.id == "equals"){
-          answer = operate(input1, input2, operand);
-          updateDisplay(answer);
-          input1 = answer.toString().split("");
-          input2 = [];
-          step1 = false;
-          step2 = false;
-          step3 = true;
-          console.log(answer)
+        answer = operate(input1, input2, operand);
+        updateDisplay(answer);
+        input1 = answer.toString().split("");
+        input2 = [];
+        step1 = false;
+        step2 = true;
+        console.log(answer)
       }
       
-      if(btn.id === "clear"){
-          clear();
+      else if(btn.id === "clear"){
+        clear();
       }
       
-      if(btn.id === "percent"){
-          answer = toPercent(input1, input2)
-          updateDisplay(answer);
-          console.log(answer)
+      else if(btn.id === "percent"){
+        answer = toPercent(input1, input2)
+        updateDisplay(answer);
+        console.log(answer)
       }
        
-      if(btn.id === "negate"){
-          answer = negate()
-          display.innerText = answer;
+      else if(btn.id === "negate"){
+        negate()
       }
-      
-      if(btn.id ){
-          step1 = false;
-          step2 = true;
-          operand = btn.id;
-          console.log(operand)
-      }
+      else{
+        step1 = false;
+        step2 = true;
+        operand = btn.id;
+        console.log(operand)   
+         } 
     })
 
      //UI Number Button Events
