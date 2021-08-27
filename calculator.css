@@ -63,7 +63,7 @@ body{
 }
 
 .btn-zero{
-    flex-grow: 2;
+    width: 45%;
     border-radius: 45px;    
 }
 
