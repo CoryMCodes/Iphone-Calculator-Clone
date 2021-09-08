@@ -63,16 +63,17 @@ body{
 }
 
 .btn-zero{
-    width: 45%;
+    flex-grow: 1;
     border-radius: 45px;    
 }
+
 
 
 /* iphone 5se */
 @media only screen and (min-width: 348px){
     .btn{
         font-size: 1em;
-        margin: 9px 6px;
+        margin: 9px 11px;
     }
 }
 
@@ -97,6 +98,9 @@ body{
 @media only screen and (min-width: 458px) {
     .calculator{
         width: 432px;
+    }
+    .btn-decimal{
+        margin-right: 25px;
     }
 }
 
