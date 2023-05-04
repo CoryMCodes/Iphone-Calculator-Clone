@@ -59,6 +59,7 @@ updateDisplay = () => {
     display.textContent = calc.displayValue;
 }
 
+
 handleOperatorEvent = (e) => {
   const targetID = e.target.id;
   // if an operator is clicked for the first time in an equation store the disply value as first value and assign operator to calc.
@@ -117,7 +118,7 @@ handleFunctionEvent = (e) => {
             const secondValue = Number(calc.secondValue)
             calc.displayValue = operate(firstValue, secondValue, calc.operand);
             calc.operandIsSelected = false;
-]        }
+        }
     } 
 
     //HANDLE CLEAR
