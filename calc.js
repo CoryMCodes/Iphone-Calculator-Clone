@@ -59,13 +59,8 @@ updateDisplay = () => {
     display.textContent = calc.displayValue;
 }
 
-setFirstValue = () => {
-
-}
-
 handleOperatorEvent = (e) => {
   const targetID = e.target.id;
-  console.log(targetID);
   // if an operator is clicked for the first time in an equation store the disply value as first value and assign operator to calc.
   if(!calc.operandIsSelected){
     calc.operand = targetID;
@@ -94,7 +89,6 @@ handleOperatorEvent = (e) => {
 
 handleNumberEvent = (e) => {
     const numberValue = e.target.innerText;
-    console.log(numberValue);
     //Limit Calculator Inputs to 8 Digits long
     if(calc.displayValue.length < 9){
         //
@@ -111,7 +105,6 @@ handleNumberEvent = (e) => {
 
 handleFunctionEvent = (e) => {
     const targetID = e.target.id;
-    console.log(targetID)
     // HANDLE EQUAL
     if(targetID === "equals"){
         // if there is no operand assigned do nothing. 
@@ -124,8 +117,7 @@ handleFunctionEvent = (e) => {
             const secondValue = Number(calc.secondValue)
             calc.displayValue = operate(firstValue, secondValue, calc.operand);
             calc.operandIsSelected = false;
-            console.log(calc)
-        }
+]        }
     } 
 
     //HANDLE CLEAR
