@@ -61,7 +61,22 @@ updateDisplay = () => {
 
 
 handleOperatorEvent = (e) => {
-  const targetID = e.target.id;
+    let targetID;
+    if(e.type ==="keyup"){
+        switch(e.key){
+            case "+" : targetID = "add";
+            break
+            case "-" : targetID = "subtract";
+            break
+            case "/" : targetID = "divide";
+            break;
+            case "*" : targetID = "multiply";
+            break
+            default: console.log(e.key);
+        }
+    }else if(e.type === "click"){
+        targetID = e.target.id;
+    }
   // if an operator is clicked for the first time in an equation store the disply value as first value and assign operator to calc.
   if(!calc.operandIsSelected){
     calc.operand = targetID;
@@ -89,7 +104,13 @@ handleOperatorEvent = (e) => {
 } 
 
 handleNumberEvent = (e) => {
-    const numberValue = e.target.innerText;
+    console.log(e.type)
+    let numberValue;
+    if(e.type === "keyup"){
+        numberValue = e.key;
+    }else if(e.type === "click"){
+        numberValue = e.target.innerText;
+    }
     //Limit Calculator Inputs to 8 Digits long
     if(calc.displayValue.length < 9){
         //
@@ -105,7 +126,23 @@ handleNumberEvent = (e) => {
 }
 
 handleFunctionEvent = (e) => {
-    const targetID = e.target.id;
+    let targetID;
+    if(e.type === "keyup"){
+        switch(e.key){
+            case "=" : targetID = "equals";
+            break
+            case "Enter" : targetID = "equals";
+            break
+            case "." : targetID = "decimal";
+            break
+            case "Backspace" : targetID = "clear";
+            break
+            default: console.log(e.key);
+        } 
+    }
+    else if (e.type = "click"){
+        targetID = e.target.id;
+    }
     // HANDLE EQUAL
     if(targetID === "equals"){
         // if there is no operand assigned do nothing. 
@@ -206,6 +243,34 @@ setVisualEventListeners = () => {
       }
   })
 } 
+
+setKeyboardEventListeners = () => {
+    document.addEventListener("keyup", (e) =>{
+        console.log(e.key)
+        if(e.key === "0" ||
+        e.key === "1" ||
+        e.key === "2" ||
+        e.key === "3" ||
+        e.key === "4" ||
+        e.key === "5" ||
+        e.key === "6" ||
+        e.key === "7" ||
+        e.key === "8" ||
+        e.key === "9"){
+            handleNumberEvent(e);
+        }else if(e.key === "+" ||
+        e.key === "-" ||
+        e.key === "/" ||
+        e.key === "*" ){
+            handleOperatorEvent(e)
+        }else if(e.key === "=" ||
+        e.key === "." ||
+        e.key === "Backspace" ||
+        e.key === "Enter"){
+            handleFunctionEvent(e)
+        }
+    })
+}
 //Create our Calc object
 calc = new Object();
 calc = {
@@ -222,5 +287,6 @@ const operators = setOperatorEventListeners();
 const numbers = setNumberEventListeners();
 const functions = setFunctionEventListeners();
 setVisualEventListeners();
+setKeyboardEventListeners();
 
 
